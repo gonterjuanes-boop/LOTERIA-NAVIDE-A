@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotería Navideña Online 2023</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #d62b2b;
+            --color-secondary: #1e7926;
+            --color-accent: #f9c80e;
+            --color-light: #ffffff;
+            --color-dark: #1a1a1a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #0a3d1f;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 20%);
+            color: var(--color-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--color-accent);
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><circle cx="25" cy="25" r="5" fill="%23f9c80e" opacity="0.3"/></svg>'),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><polygon points="15,3 6,30 30,12 3,12 24,30" fill="%23ffffff" opacity="0.1"/></svg>');
+            z-index: 0;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            color: #fff;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--color-accent);
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--color-light);
+        }
+        
+        .christmas-lights {
+            height: 20px;
+            width: 100%;
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="%23d62b2b" /><circle cx="10" cy="10" r="3" fill="%23f9c80e" /></svg>'), 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="%231e7926" /><circle cx="10" cy="10" r="3" fill="%23f9c80e" /></svg>'), 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="%23f9c80e" /><circle cx="10" cy="10" r="3" fill="%23d62b2b" /></svg>');
+            background-repeat: repeat-x;
+            background-size: 20px 20px;
+            margin: 20px 0;
+            animation: lights 2s linear infinite;
+        }
+        
+        @keyframes lights {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .prizes {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .prize-card {
+            background: linear-gradient(145deg, #f9c80e, #d62b2b);
+            border-radius: 15px;
+            padding: 25px;
+            width: 45%;
+            min-width: 280px;
+            margin: 15px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid white;
+        }
+        
+        .prize-card::after {
+            content: "🎄";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+        
+        .prize-card:nth-child(2) {
+            background: linear-gradient(145deg, #1e7926, #0a3d1f);
+        }
+        
+        .prize-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+        }
+        
+        .prize-card p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .ticket-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid var(--color-accent);
+        }
+        
+        .ticket-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .ticket-input {
+            padding: 15px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            width: 120px;
+            text-align: center;
+            background-color: var(--color-light);
+            color: var(--color-dark);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to bottom, var(--color-primary), #a01c1c);
+            color: white;
+            box-shadow: 0 5px 0 #7a1515;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 #7a1515;
+        }
+        
+        .btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 #7a1515;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(to bottom, var(--color-secondary), #125e30);
+            color: white;
+            box-shadow: 极速飞艇
+            <div class="container">
+                <header>
+                    <h1>🎄 Lotería Navideña 2023 🎄</h1>
+                    <p>¡Participa por fantásticos premios y celebra la Navidad con nosotros!</p>
+                </header>
+                
+                <div class="christmas-lights"></div>
+                
+                <section class="prizes">
+                    <div class="prize-card">
+                        <h3>🏆 Primer Premio</h3>
+                        <p>$400 USD</p>
+                        <p>+ Canasta Navideña</p>
+                    </div>
+                    <div class="prize-card">
+                        <h3>🥈 Segundo Premio</h3>
+                        <p>$100 USD</p>
+                        <p>+ Canasta Navideña</p>
+                    </div>
+                </section>
+                
+                <div class="christmas-lights"></div>
+                
+                <section class="draw-date">
+                    <h3>🗓 Fecha del Sorteo</h3>
+                    <p>Penúltimo domingo de diciembre a las 7:00 PM</p>
+                    <p>Transmisión en vivo por Instagram</p>
+                </section>
+                
+                <div class="christmas-lights"></div>
+                
+                <section class="ticket-section">
+                    <h2>🎟 Compra tus Boletos</h2>
+                    <p>Cada boleto tiene un costo de <strong>$2 USD</strong> y corresponde a un número único del 0001 al 2000.</p>
+                    
+                    <div class="ticket-counter" id="ticketsAvailable">
+                        Boletos disponibles: 2000 de 2000
+                    </div>
+                    
+                    <div class="ticket-controls">
+                        <input type="number" id="ticketQuantity" class="ticket-input" min="1" value="1" max="50">
+                        <button id="addTickets" class="btn btn-primary">
+                            <i class="fas fa-ticket-alt"></i> Agregar Boletos
+                        </button>
+                        <button id="checkout" class="btn btn-secondary">
+                            <i class="fas fa-shopping-cart"></i> Realizar Compra
+                        </button>
+                    </div>
+                    
+                    <div class="selected-tickets" id="selectedTickets">
+                        <p id="noTicketsMessage">No has seleccionado boletos aún.</p>
+                    </div>
+                    
+                    <p id="totalAmount">Total: $0 USD</p>
+                </section>
+                
+                <div class="christmas-lights"></div>
+                
+                <section class="instagram-section">
+                    <h3>📱 Síguenos en Instagram</h3>
+                    <p>Mantente al tanto de todos los detalles del sorteo y resultados</p>
+                    <a href="https://www.instagram.com/loteriaonline7?igsh=cWk0bXlzaG1jNWJ0" class="instagram-btn" target="_blank">
+                        <i class="fab fa-instagram"></i> @loteriaonline7
+                    </a>
+                </section>
+                
+                <div class="christmas-lights"></div>
+                
+                <section class="bank-info">
+                    <h3>💳 Información para Transferencia</h3>
+                    <p>Realiza tu transferencia al siguiente número de cuenta y envía el comprobante para confirmar tu compra:</p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Banco:</strong> Pichincha
+                        </div>
+                        <div class="info-item">
+                            <strong>Número de Cuenta:</strong> 22 08 77 35 22
+                        </div>
+                        <div class="info-item">
+                            <strong>Cédula:</strong> 11 056 17 92 0
+                        </div>
+                        <div class="info-item">
+                            <strong>Titular:</strong> Lotería Navideña 2023
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="whatsapp-section">
+                    <h3>📞 Contáctanos por WhatsApp</h3>
+                    <p>Escríbenos para confirmar tu compra o para comprar boletos en físico: <strong>0980 21 24 88</strong></p>
+                    
+                    <div class="qr-code" id="whatsappQR">
+                        <!-- QR code will be generated by JavaScript -->
+                    </div>
+                </section>
+            </div>
+            
+            <footer>
+                <p>© 2023 Lotería Navideña - Todos los derechos reservados</p>
+                <p>¡Felices Fiestas! 🎅🎁</p>
+            </footer>
+
+            <!-- Modal de pago -->
+            <div class="payment-modal" id="paymentModal">
+                <div class="modal-content">
+                    <button class="close-modal" id="closeModal">&times;</button>
+                    <h2><i class="fas fa-money-bill-wave"></i> Confirmación de Compra</h2>
+                    
+                    <div class="purchase-summary">
+                        <h3>Resumen de tu compra</h3>
+                        <p id="modalTickets"></p>
+                        <p id="modalTotal"></p>
+                    </div>
+                    
+                    <div class="payment-options">
+                        <div class="payment-option selected" id="bankTransferOption">
+                            <h4><i class="fas fa-university"></i> Transferencia Bancaria</h4>
+                            <p>Transfiere directamente a nuestra cuenta del Banco Pichincha</p>
+                        </div>
+                        
+                        <div class="payment-option" id="paypalOption">
+                            <h4><i class="fab fa-paypal"></i> PayPal/Tarjeta de Crédito</h4>
+                            <p>Paga de forma segura con PayPal o tarjeta de crédito/débito</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bank-details" id="bankDetails">
+                        <h3><i class="fas fa-university"></i> Datos Bancarios</h3>
+                        
+                        <div class="bank-detail-item">
+                            <span>Banco:</span>
+                            <span>Pichincha</span>
+                        </div>
+                        
+                        <div class="bank-detail-item">
+                            <span>Número de Cuenta:</span>
+                            <span>22 08 77 35 22 <button class="copy-btn" data-text="2208773522">Copiar</button></span>
+                        </div>
+                        
+                        <div class="bank-detail-item">
+                            <span>Cédula:</span>
+                            <span>11 056 17 92 0 <button class="copy-btn" data-text="1105617920">Copiar</button></span>
+                        </div>
+                        
+                        <div class="bank-detail-item">
+                            <span>Titular:</span>
+                            <span>Lotería Navideña 2023</span>
+                        </div>
+                        
+                        <div class="bank-detail-item">
+                            <span>Monto a transferir:</span>
+                            <span id="modalTransferAmount"></span>
+                        </div>
+                    </div>
+                    
+                    <div id="paypalButtonContainer" style="display: none;">
+                        <p>Serás redirigido a PayPal para completar tu pago de forma segura.</p>
+                        <button class="paypal-button">
+                            <i class="fab fa-paypal"></i> Pagar con PayPal
+                        </button>
+                    </div>
+                    
+                    <div class="instructions">
+                        <h3><i class="fas fa-list-ol"></i> Instrucciones</h3>
+                        <ol>
+                            <li id="instructionStep1">Realiza la transferencia por el monto exacto indicado</li>
+                            <li>Envía el comprobante al WhatsApp <strong>0980 21 24 88</strong></li>
+                            <li>Recibirás la confirmación de tus números reservados</li>
+                            <li>¡Participa en el sorteo el día 24 de diciembre!</li>
+                        </ol>
+                    </div>
+                    
+                    <button id="confirmPayment" class="btn btn-primary">
+                        <i class="fas fa-check-circle"></i> He realizado el pago
+                    </button>
+                    
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i> ¡Gracias por tu compra! Tus boletos han sido reservados. 
+                        No olvides enviar el comprobante por WhatsApp.
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Código JavaScript completo aquí
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Generar nieve
+                    const snowflakesContainer = document.querySelector('.snowflakes');
+                    const snowflakeSymbols = ['❄', '❅', '❆', '✻', '✼', '❉'];
+                    const screenWidth = window.innerWidth;
+                    
+                    for (let i = 0; i < 50; i++) {
+                        const snowflake = document.createElement('div');
+                        snowflake.className = 'snowflake';
+                        snowflake.textContent = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+                        snowflake.style.left = Math.random() * screenWidth + 'px';
+                        snowflake.style.animationDuration = (5 + Math.random() * 10) + 's';
+                        snowflake.style.animationDelay = Math.random() * 5 + 's';
+                        snowflakesContainer.appendChild(snowflake);
+                    }
+                    
+                    // Generar código QR
+                    const phoneNumber = '5980212488';
+                    const qrMessage = encodeURIComponent('Hola, estoy interesado/a en comprar boletos para la lotería navideña');
+                    const qrUrl = https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/${phoneNumber}?text=${qrMessage};
+                    
+                    const qrCodeDiv = document.getElementById('whatsappQR');
+                    qrCodeDiv.innerHTML = '';
+                    const qrImage = document.createElement('img');
+                    qrImage.src = qrUrl;
+                    qrImage.alt = 'Código QR de WhatsApp';
+                    qrImage.width = 150;
+                    qrImage.height = 150;
+                    qrCodeDiv.appendChild(qrImage);
+                    
+                    // Sistema de boletos
+                    const availableTickets = Array.from({length: 2000}, (_, i) => (i + 1).toString().padStart(4, '0'));
+                    const selectedTickets = [];
+                    const ticketPrice = 2;
+                    
+                    const ticketQuantityInput = document.getElementById('ticketQuantity');
+                    const addTicketsButton = document.getElementById('addTickets');
+                    const checkoutButton = document.getElementById('checkout');
+                    const selectedTicketsContainer = document.getElementById('selectedTickets');
+                    const noTicketsMessage = document.getElementById('noTicketsMessage');
+                    const totalAmountElement = document.getElementById('totalAmount');
+                    const ticketsAvailableElement = document.getElementById('ticketsAvailable');
+                    const paymentModal = document.getElementById('paymentModal');
+                    const closeModalButton = document.getElementById('closeModal');
+                    const modalTicketsElement = document.getElementById('modalTickets');
+                    const modalTotalElement = document.getElementById('modalTotal');
+                    const modalTransferAmountElement = document.getElementById('modalTransferAmount');
+                    const confirmPaymentButton = document.getElementById('confirmPayment');
+                    const successMessage = document.getElementById('successMessage');
+                    const bankTransferOption = document.getElementById('bankTransferOption');
+                    const paypalOption = document.getElementById('paypalOption');
+                    const bankDetails = document.getElementById('bank
